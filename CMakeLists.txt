@@ -9,9 +9,13 @@ set(trekkerExe trekker)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(UNIX AND NOT APPLE)
+if (APPLE)
+        add_definitions(-D BUILD_FOR_MACOS)
+endif()
 
-	message(STATUS "Building for Linux")
+if(UNIX OR APPLE)
+
+	message(STATUS "Building for Linux/Mac")
 
 	# Set up manual page
 	add_definitions(-DSHOWMANUAL="man ${CMAKE_SOURCE_DIR}/doc/build/man/trekker")
@@ -34,7 +38,6 @@ if(UNIX AND NOT APPLE)
 	endif()
 
 elseif(MSVC)
-
   message(STATUS "Building for Windows")
 
 	# Building for Windows
@@ -151,3 +154,4 @@ if(${Build_Python3_WRAPPER} STREQUAL "ON")
 	endif()
 
 endif()
+

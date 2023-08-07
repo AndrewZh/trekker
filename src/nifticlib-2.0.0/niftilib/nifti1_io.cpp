@@ -28,7 +28,7 @@
  */
 
 /*! global history and version strings, for printing */
-static char * gni_history[] = 
+static char const * gni_history[] =
 {
   "----------------------------------------------------------------------\n"
   "history (of nifti library changes):\n"
@@ -534,7 +534,7 @@ nifti_image *nifti_image_read_bricks(const char * hname, int nbricks,
    nifti_image * nim;
 
    if( !hname || !NBL ){
-      fprintf(stderr,"** nifti_image_read_bricks: bad params (%p,%p)\n",
+      fprintf(stderr,"** nifti_image_read_bricks: bad params (%s,%p)\n",
               hname, (void *)NBL);
       return NULL;
    }
@@ -1183,7 +1183,7 @@ char *nifti_strdup(const char *str)
 
     \sa NIFTI1_DATATYPES group in nifti1.h
 *//*-------------------------------------------------------------------------*/
-char *nifti_datatype_string( int dt )
+char const *nifti_datatype_string( int dt )
 {
    switch( dt ){
      case DT_UNKNOWN:    return "UNKNOWN"    ;
@@ -1252,7 +1252,7 @@ int nifti_is_inttype( int dt )
 
     \sa     NIFTI1_UNITS group in nifti1.h
 *//*-------------------------------------------------------------------------*/
-char *nifti_units_string( int uu )
+char const *nifti_units_string( int uu )
 {
    switch( uu ){
      case NIFTI_UNITS_METER:  return "m" ;
@@ -1280,7 +1280,7 @@ char *nifti_units_string( int uu )
 
     \sa     NIFTI1_XFORM_CODES group in nifti1.h
 *//*-------------------------------------------------------------------------*/
-char *nifti_xform_string( int xx )
+char const *nifti_xform_string( int xx )
 {
    switch( xx ){
      case NIFTI_XFORM_SCANNER_ANAT:  return "Scanner Anat" ;
@@ -1303,7 +1303,7 @@ char *nifti_xform_string( int xx )
 
     \sa     NIFTI1_INTENT_CODES group in nifti1.h
 *//*-------------------------------------------------------------------------*/
-char *nifti_intent_string( int ii )
+char const *nifti_intent_string( int ii )
 {
    switch( ii ){
      case NIFTI_INTENT_CORREL:     return "Correlation statistic" ;
@@ -1359,7 +1359,7 @@ char *nifti_intent_string( int ii )
 
     \sa     NIFTI1_SLICE_ORDER group in nifti1.h
 *//*-------------------------------------------------------------------------*/
-char *nifti_slice_string( int ss )
+char const *nifti_slice_string( int ss )
 {
    switch( ss ){
      case NIFTI_SLICE_SEQ_INC:  return "sequential_increasing"    ;
@@ -1384,7 +1384,7 @@ char *nifti_slice_string( int ss )
 
     \sa  NIFTI_L2R in nifti1_io.h
 *//*-------------------------------------------------------------------------*/
-char *nifti_orientation_string( int ii )
+char const *nifti_orientation_string( int ii )
 {
    switch( ii ){
      case NIFTI_L2R: return "Left-to-Right" ;
@@ -3057,7 +3057,7 @@ int nifti_set_filenames( nifti_image * nim, const char * prefix, int check,
    int comp = nifti_is_gzfile(prefix);
 
    if( !nim || !prefix ){
-      fprintf(stderr,"** nifti_set_filenames, bad params %p, %p\n",
+      fprintf(stderr,"** nifti_set_filenames, bad params %p, %s\n",
               (void *)nim,prefix);
       return -1;
    }
@@ -3382,7 +3382,7 @@ int nifti_set_type_from_names( nifti_image * nim )
    if( !nim ){ fprintf(stderr,"** NSTFN: no nifti_image\n");  return -1; }
 
    if( !nim->fname || !nim->iname ){
-      fprintf(stderr,"** NSTFN: missing filename(s) fname @ %p, iname @ %p\n",
+      fprintf(stderr,"** NSTFN: missing filename(s) fname @ %s, iname @ %s\n",
               nim->fname, nim->iname);
       return -1;
    }
@@ -4540,7 +4540,7 @@ static int nifti_fill_extension( nifti1_extension *ext, const char * data,
    int esize;
 
    if( !ext || !data || len < 0 ){
-      fprintf(stderr,"** fill_ext: bad params (%p,%p,%d)\n",
+      fprintf(stderr,"** fill_ext: bad params (%p,%s,%d)\n",
               (void *)ext, data, len);
       return -1;
    } else if( ! nifti_is_valid_ecode(ecode) ){
@@ -4788,7 +4788,7 @@ static znzFile nifti_image_load_prep( nifti_image *nim )
    {
       if ( g_opts.debug > 0 ){
          if( !nim ) fprintf(stderr,"** ERROR: N_image_load: no nifti image\n");
-         else fprintf(stderr,"** ERROR: N_image_load: bad params (%p,%d,%u)\n",
+         else fprintf(stderr,"** ERROR: N_image_load: bad params (%s,%d,%u)\n",
                       nim->iname, nim->nbyper, (unsigned)nim->nvox);
       }
       return NULL;
@@ -7397,7 +7397,7 @@ int nifti_datatype_from_string( const char * name )
  *  corresponding macro label as a string.  The dtype code is the
  *  macro value defined in nifti1.h.
 *//*-------------------------------------------------------------------*/
-char * nifti_datatype_to_string( int dtype )
+char const * nifti_datatype_to_string( int dtype )
 {
     int tablen = sizeof(nifti_type_list)/sizeof(nifti_type_ele);
     int c;
@@ -7482,7 +7482,7 @@ int nifti_test_datatype_sizes(int verb)
 *//*-------------------------------------------------------------------*/
 int nifti_disp_type_list( int which )
 {
-    char * style;
+    char const * style;
     int    tablen = sizeof(nifti_type_list)/sizeof(nifti_type_ele);
     int    lwhich, c;
 

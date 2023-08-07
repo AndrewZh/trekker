@@ -245,12 +245,12 @@ typedef struct {
 /*****************************************************************************/
 /*--------------- Prototypes of functions defined in this file --------------*/
 
-char *nifti_datatype_string   ( int dt ) ;
-char *nifti_units_string      ( int uu ) ;
-char *nifti_intent_string     ( int ii ) ;
-char *nifti_xform_string      ( int xx ) ;
-char *nifti_slice_string      ( int ss ) ;
-char *nifti_orientation_string( int ii ) ;
+char const *nifti_datatype_string   ( int dt ) ;
+char const *nifti_units_string      ( int uu ) ;
+char const *nifti_intent_string     ( int ii ) ;
+char const *nifti_xform_string      ( int xx ) ;
+char const *nifti_slice_string      ( int ss ) ;
+char const *nifti_orientation_string( int ii ) ;
 
 int   nifti_is_inttype( int dt ) ;
 
@@ -271,7 +271,7 @@ void  nifti_swap_Nbytes ( size_t n , int siz , void *ar ) ;
 
 int    nifti_datatype_is_valid   (int dtype, int for_nifti);
 int    nifti_datatype_from_string(const char * name);
-char * nifti_datatype_to_string  (int dtype);
+char const * nifti_datatype_to_string  (int dtype);
 
 int   nifti_get_filesize( const char *pathname ) ;
 void  swap_nifti_header ( struct nifti_1_header *h , int is_nifti ) ;
@@ -494,7 +494,7 @@ typedef struct {
     int    type;           /* should match the NIFTI_TYPE_ #define */
     int    nbyper;         /* bytes per value, matches nifti_image */
     int    swapsize;       /* bytes per swap piece, matches nifti_image */
-    char * name;           /* text string to match #define */
+    char const * name;           /* text string to match #define */
 } nifti_type_ele;
 
 #undef  LNI_FERR /* local nifti file error, to be compact and repetative */
